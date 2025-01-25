@@ -5,6 +5,13 @@ if ($null -ne $Package) {
     exit
 }
 
+[version]$RequiredVersion = [version]"10.0.19041.0"
+[version]$CurrentOSVersion = [version](Get-CimInstance Win32_OperatingSystem | Select-Object -ExpandProperty Version)
+if ($CurrentOSVersion -lt $RequiredVersion){
+    Write-Host "Cannot install package because this package is not compatible with the device. The package requires OS version 10.0.19041.0 or higher (Windows Server 2022 at least). The device is currently running OS version $CurrentOSVersion"
+}
+
+
 ### Download Microsoft.VCLibs.x64.14.00.Desktop.appx
 Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile "$env:temp\Microsoft.VCLibs.x64.14.00.Desktop.appx"
 
