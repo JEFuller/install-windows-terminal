@@ -5,7 +5,7 @@ Inspired by: https://github.com/microsoft/terminal/discussions/13983#discussionc
 
 ## Current versions provided by scripts
 Current `Windows Terminal` version provided by `Install-WindowsTerminal.ps1` script : 1.21.3231.0  
-Current `Windows Terminal Preview` version provided by `Install-WindowsTerminalPreview.ps1` script : 1.22.3232.0  
+Current `Windows Terminal Preview` version provided by `Install-WindowsTerminal.ps1` script : 1.22.3232.0  
 
 ## Usage
 ### Online installation
