@@ -8,7 +8,8 @@ Current `Windows Terminal` version provided by `Install-WindowsTerminal.ps1` scr
 Current `Windows Terminal Preview` version provided by `Install-WindowsTerminalPreview.ps1` script : 1.22.3232.0  
 
 ## Usage
-Install-WindowsTerminal can download all files by itself. Just use one of examples below.  
+### Online installation
+Install-WindowsTerminal.ps1 can download all files by itself. Just use one of examples below.  
 ```Powershell
 # Example 1: Installing for current user.
 & .\Install-WindowsTerminal
@@ -22,8 +23,8 @@ Install-WindowsTerminal can download all files by itself. Just use one of exampl
 # Example 4: Installing Preview version for all users.
 & .\Install-WindowsTerminal -Scope AllUsers -Preview
 ```
-
-Or it can be offline installer. Just downoad files by yourself and place it in the same folder as Install-WindowsTerminal.ps1.  
+### Offline installation
+Install-WindowsTerminal.ps1 can be used as offline installer. Just download files manually and place it in the same folder.  
 ### Download Microsoft.VCLibs.x64.14.00.Desktop.appx  
 https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx  
 ### Download Microsoft.UI.Xaml.2.8.x64.appx  
