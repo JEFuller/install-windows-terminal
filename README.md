@@ -8,7 +8,7 @@ Current `Windows Terminal` version provided by `Install-WindowsTerminal.ps1` scr
 Current `Windows Terminal Preview` version provided by `Install-WindowsTerminalPreview.ps1` script : 1.22.3232.0  
 
 ## Usage
-Install-WindowsTerminal can download all files by itself. Just use one of example.  
+Install-WindowsTerminal can download all files by itself. Just use one of examples below.  
 ```Powershell
 # Example 1: Installing for current user.
 & .\Install-WindowsTerminal
