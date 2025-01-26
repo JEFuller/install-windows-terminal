@@ -12,16 +12,16 @@ DateModified: 01.26.2025
     
 .EXAMPLE
 # Example 1: Installing for current user.
-Install-WindowsTerminal
+& .\Install-WindowsTerminal
 
 # Example 2: Installing for all users.
-Install-WindowsTerminal -Scope AllUsers
+& .\Install-WindowsTerminal -Scope AllUsers
 
 # Example 3: Installing Preview version for current user.
-Install-WindowsTerminal -Preview
+& .\Install-WindowsTerminal -Preview
 
 # Example 4: Installing Preview version for all users.
-Install-WindowsTerminal -Scope AllUsers -Preview
+& .\Install-WindowsTerminal -Scope AllUsers -Preview
     
 .LINK
 https://github.com/JEFuller/install-windows-terminal    
@@ -48,6 +48,17 @@ else {
 }
 if ($null -ne $Package) {
     Write-Host "$PackageName is already installed."
+    exit
+}
+
+### Checking elevation if installing for all users.
+Function Test-IsAdmin {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal $identity
+    $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+}
+if ($Scope -eq "AllUsers" -and !(Test-IsAdmin)) {
+    Throw "Installation with -Scope AllUsers requires elevation!"
     exit
 }
 
@@ -152,46 +163,46 @@ if ($Scope -eq "CurrentUser") {
 # Install for AllUsers
 else {
     if ($vclibs_x64_present) {
-        Add-ProvisionedAppPackage -Online -PackagePath ".\$vclibs_x64_filename" -SkipLicense
+        Add-ProvisionedAppPackage -Online -PackagePath ".\$vclibs_x64_filename" -SkipLicense | Out-Null
     }
     else {
-        Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$vclibs_x64_filename" -SkipLicense
+        Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$vclibs_x64_filename" -SkipLicense | Out-Null
     }
 
     if ($uixaml_x64_present) {
-        Add-ProvisionedAppPackage -Online -PackagePath ".\$uixaml_x64_filename" -SkipLicense
+        Add-ProvisionedAppPackage -Online -PackagePath ".\$uixaml_x64_filename" -SkipLicense | Out-Null
     }
     else {
-        Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$uixaml_x64_filename" -SkipLicense
+        Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$uixaml_x64_filename" -SkipLicense | Out-Null
     }
 
     if ($null -ne $Preview) {
         if ($windows_terminal_preview_present) { 
-            Add-ProvisionedAppPackage -Online -PackagePath ".\$windows_terminal_preview_filename" -SkipLicense
+            Add-ProvisionedAppPackage -Online -PackagePath ".\$windows_terminal_preview_filename" -SkipLicense | Out-Null
         }
         else {
-            Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$windows_terminal_preview_filename" -SkipLicense
+            Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$windows_terminal_preview_filename" -SkipLicense | Out-Null
         }
     }
     else {
         if ($windows_terminal_present) {
-            Add-ProvisionedAppPackage -Online -PackagePath ".\$windows_terminal_filename" -SkipLicense
+            Add-ProvisionedAppPackage -Online -PackagePath ".\$windows_terminal_filename" -SkipLicense | Out-Null
         }
         else {
-            Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$windows_terminal_filename" -SkipLicense
+            Add-ProvisionedAppPackage -Online -PackagePath "$env:temp\$windows_terminal_filename" -SkipLicense | Out-Null
         }
     }
 }
 Write-Host "Microsoft.WindowsTerminal installed successfull."
 
 ### Removing temp files
-if ($vclibs_x64_present -eq $false){
+if ($vclibs_x64_present -eq $false) {
     Remove-Item -Path "$env:temp\$vclibs_x64_filename" -ErrorAction SilentlyContinue
 }
-if ($uixaml_x64_present -eq $false){
+if ($uixaml_x64_present -eq $false) {
     Remove-Item -Path "$env:temp\$uixaml_x64_filename" -ErrorAction SilentlyContinue
 }
-if ($null -ne $Preview){
+if ($null -ne $Preview) {
     if ($windows_terminal_preview_present -eq $false) {
         Remove-Item -Path "$env:temp\$windows_terminal_preview_filename" -ErrorAction SilentlyContinue
     }
