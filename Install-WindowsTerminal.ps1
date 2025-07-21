@@ -1,19 +1,23 @@
 <#
     .SYNOPSIS
-    This script installs the latest Windows Terminal.
+    This script could be used to install the latest Windows Terminal on Windows Server (Windows Server 2022 at least).
 
     .DESCRIPTION
-    This script aims to install the latest version of Windows Terminal including its Preview version.
-    Windows Terminal can be installed for the current user or for all users on the system.
+    This script aims to install the latest version of Windows Terminal. It could install both Stable and Preview version.
+    Windows Terminal can be installed for the current user or for all users on the system. 
     The package requires OS version 10.0.19041.0 or higher (Windows Server 2022 at least).
+    The script could be used even to install Windows Terminal in air-gapped environment without internet.
+    Parameters -DownloadOnly and -OfflineInstall should be used to download content beforehand and perform 
+    offline installation later.
 
     .NOTES
     Name: Install-WindowsTerminal.ps1
-    Author: Dave Tapley (JE Fuller) @davetapley
-    Contribution: @ahpooch
-    Version: 1.0.1
+    Author: @ahpooch
+    Version: 1.0.2
     License: MIT
-    DateModified: 06.26.2025
+    DateModified: 07.21.2025
+
+    Acknowledgement: Dave Tapley (JE Fuller) - davetapley/install-windows-terminal
 
     .PARAMETER Scope
     Could be one of: "CurrentUser", "AllUsers"
@@ -32,35 +36,35 @@
 
     .EXAMPLE 
     Installation of Windows Terminal for current user.
-    PS> & .\Install-WindowsTerminal
+    PS> & .\Install-WindowsTerminal.ps1
 
     .EXAMPLE
     Installation of Windows Terminal for all users.
-    PS> & .\Install-WindowsTerminal -Scope AllUsers
+    PS> & .\Install-WindowsTerminal.ps1 -Scope AllUsers
 
     .EXAMPLE
     Installation of Windows Terminal Preview for current user.
-    PS> & .\Install-WindowsTerminal -Preview
+    PS> & .\Install-WindowsTerminal.ps1 -Preview
 
     .EXAMPLE
     Installation of Windows Terminal Preview for all users.
-    PS> & .\Install-WindowsTerminal -Scope AllUsers -Preview
+    PS> & .\Install-WindowsTerminal.ps1 -Scope AllUsers -Preview
     
     .EXAMPLE
     Download files for Windows Terminal offline installation.
-    PS> & .\Install-WindowsTerminal -DownloadOnly
+    PS> & .\Install-WindowsTerminal.ps1 -DownloadOnly
 
     .EXAMPLE
     Download files for Windows Terminal Preview offline installation.
-    PS> & .\Install-WindowsTerminal -Preview -DownloadOnly
+    PS> & .\Install-WindowsTerminal.ps1 -Preview -DownloadOnly
     
     .EXAMPLE
     Installation of Windows Termianl for current user, using cached files in the script directory.
-    PS> & .\Install-WindowsTerminal -OfflineInstall
+    PS> & .\Install-WindowsTerminal.ps1 -OfflineInstall
 
     .EXAMPLE
     Installation of Windows Terminal Preview for all users, using cached files in the script directory.
-    PS> & .\Install-WindowsTerminal -Scope AllUsers -Preview -OfflineInstall
+    PS> & .\Install-WindowsTerminal.ps1 -Scope AllUsers -Preview -OfflineInstall
 
     .INPUTS
     None.
@@ -68,9 +72,6 @@
     .OUTPUTS
     System.String.
     Install-WindowsTerminal.ps1 returns the installed Windows Terminal version and build.
-
-    .LINK
-    https://github.com/JEFuller/install-windows-terminal
 
     .LINK
     https://github.com/ahpooch/install-windows-terminal
