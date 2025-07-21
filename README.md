@@ -1,4 +1,1 @@
-# install-windows-terminal
-Easily install the new Windows Terminal on Windows Server
-
-Inspired by: https://github.com/microsoft/terminal/discussions/13983#discussioncomment-7554301
+See https://github.com/ahpooch/Install-WindowsTerminal
